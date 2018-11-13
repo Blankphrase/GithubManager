@@ -5,18 +5,21 @@
   
 
     <div id="respositories">
-  <h2>Repo Branches</h2>
-  <ul v-for="branch in branches" :key="branch.id">
+  <h2>Repository Contents</h2>
+  <ul > 
   <li >
-   <span class="name"><b>Branch Name:</b> {{branch.name}}</span><br>
-   <span class="name"><b>Commit Sha: </b> {{branch.commit.sha}}</span><br>
-   <span class="name"><b>Commit Url:</b> {{branch.commit.url}}</span><br>
-  
+ 
+  <span class="name"><b>Name: </b>{{repositoriesdetails.name}}</span><br>
+  <span class="name"><b>html_url: </b>{{repositoriesdetails.html_url}}</span><br>
+  <span class="name"><b>deployments_url: </b>{{repositoriesdetails.deployments_url}}</span><br>
+  <span class="name"><b>Owner login</b>{{repositoriesdetails.owner.login}}</span>
+  <span class="name"><b></b>{{repositoriesdetails.subscription_url}}</span>
+   
 </li>
 <br>
+{{repo}}
 
   </ul>
-  <router-link v-bind:to="'/createbranch/'"><a href="/createbranch" class="btn btn-primary" >Create new branch</a></router-link >
     <router-view/>
     </div>
   </div>
@@ -27,7 +30,6 @@
 export default{
  data () {
      return{
-
          repository:'',
          username:''
      }
@@ -36,14 +38,13 @@ export default{
       let repository =this.$route.params.repository;
       localStorage.setItem('repository',repository);
       this.username = localStorage.getItem('username');
-      
   },
    mounted () {
-    this.$store.dispatch('getBranches')
+    this.$store.dispatch('getRepositoryDetails')
   },
     computed: {
-    branches(){
-    return this.$store.state.branches;
+    repositoriesdetails(){
+    return this.$store.state.repositoriesdetails;
     }
 }
 }
@@ -52,3 +53,4 @@ export default{
 <style lang="scss">
 @import '~bootstrap/scss/bootstrap.scss';
 </style>
+

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <a href="/profile" class="btn btn-primary" >Profile</a>
-      <router-link v-bind:to="'/respositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
+      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
 
 
     <div id="nav">
@@ -33,11 +33,10 @@
 </template>
 
 <script>
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
 export default{
  mounted () {
-    this.$store.dispatch('loadContents')
+    this.$store.dispatch('getRepositoryDetails')
   },
 data(){
   return{
@@ -49,13 +48,13 @@ data(){
   }
 },
    computed: {
-     contents(){
-    return this.$store.state.contents;
+    repositoriesdetails(){
+      return this.$store.state.repositoriesdetails;
     }
 },
 created(){
-      this.username = localStorage.getItem('userName');
-      this.title=this.$route.params.repo;
+      this.username = localStorage.getItem('username');
+      this.title=this.$route.params.repository;
   },
  methods: {
  submitData() {
@@ -63,17 +62,21 @@ created(){
         .post('https://api.github.com/'+ localStorage.getItem('username') +'/'+ 'repos', {
           name: this.name,
           description: this.description,
-          homepage: 'http:localhost:8080',
+          homepage: 'http:localhost:5000',
           private: false,
           has_issues: true,
           has_projects: true,
           has_wiki: true
         })
        .then(function(){
-          this.status="repo edited successfully"
+          this.status="changes were successful"
         });
     }
     }
   }
 </script>
+
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
+</style>
 

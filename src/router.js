@@ -1,6 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import Branches from './components/Branches.vue';
+import Commits from './components/Commits.vue';
+import CreateBranch from './components/CreateBranch.vue';
+import Create from './components/Create.vue';
+import Dashboard from './components/Dashboard.vue';
+import Edit from './components/Edit.vue';
+import Profile from './components/Profile.vue';
+import Repositories from './components/Repositories.vue';
+import Details from './components/Details.vue';
+
 
 
 Vue.use(Router);
@@ -12,74 +22,82 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home,
     }, 
-    {
-      path: '/dash',
-      name: 'dash',
-      component: () => import(/* webpackChunkName: "about" */ './components/Dashboard.vue'),
-    }, 
-    {
-      path: '/contents/:repo',
-      name: 'content',
-      component: () => import(/* webpackChunkName: "about" */ './components/RepositoryDetails.vue'),
-    }, 
-    {
-      path: '/commits/:repo',
-      name: 'commits',
-      component: () => import(/* webpackChunkName: "about" */ './components/Commits.vue'),
-    }, 
-    {
-      path: '/editrepo/:repo',
-      name: 'edits',
-      component: () => import(/* webpackChunkName: "about" */ './components/EditRepository.vue'),
-    },
-    {
-      path: '/createbranch/',
-      name: 'createbranch',
-      component: () => import(/* webpackChunkName: "about" */ './components/CreateBranch.vue'),
-    },
-   
-    {
-      path: '/profile',
-      name: 'profile2',
-      component: () => import(/* webpackChunkName: "about" */ './components/Profile.vue')
-    
-    },
-    {
-      path: '/respositories/:username',
-      name: 'respositories',  
-      component: () => import(/* webpackChunkName: "about" */ './components/Repositories.vue')
-     
-    },
-    {
-      path: '/respositories',
-      name: 'respos',  
-      component: () => import(/* webpackChunkName: "about" */ './components/Repositories.vue')
-     
-    },
-    {
-      path: '/branches/:repo',
-      name: 'branches',  
-      component: () => import(/* webpackChunkName: "about" */ './components/Branches.vue')
-     
-    },
 
-    {
-      path: '/createrepo',
-      name: 'createrepo',
-      component: () => import(/* webpackChunkName: "about" */ './components/CreateRepository.vue'),
-    },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       beforeEnter() {
         window.location = 'https://github.com/login/oauth/authorize?client_id=' + '5529f03c82440fcac6f4'
-    }
+      }
+    },
+
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
+    }, 
+
+// Repositories components
+    {
+      path: '/create',
+      name: 'Create',
+      component: Create,
+    },
+
+    {
+      path: '/edit/:repository',
+      name: 'Edit',
+      component: Edit,
+    },
+
+    {
+      path: '/details/:repository',
+      name: 'Details',
+      component: Details,
+    },
+
+    {
+      path: '/repositories/:username',
+      name: 'UserRepositories',  
+      component: Repositories,
+    },
+
+    {
+      path: '/commits/:repository',
+      name: 'Commits',
+      component: Commits,
+    },
+
+    {
+      path: '/repositories',
+      name: 'AllRepositories',  
+      component: Repositories,
+     
+    },
+
+// Branches components
+    {
+      path: '/branches/:repository',
+      name: 'Branches',  
+      component: Branches,
+     
+    },
+
+    {
+      path: '/createbranch/',
+      name: 'CreateBranch',
+      component: CreateBranch,
+    },
+
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+    
     },
     
-
-
   ],
 });

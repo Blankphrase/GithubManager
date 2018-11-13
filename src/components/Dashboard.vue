@@ -12,13 +12,13 @@
 import axios from 'axios'
 import Qs from 'qs';
 export default {
-  name: 'Dash',
+  name: 'Dashboard',
   computed: {
      
   },
   data () {
     return {
-      userCode: '',
+      client: '',
       usereState: '',
     }
   },
@@ -30,7 +30,7 @@ export default {
   },
 
   created(){
-    this.userCode=this.$route.query.code;
+    this.u=this.$route.query.code;
     this.userState=this.$route.query.state;
 
      axios
@@ -49,23 +49,6 @@ export default {
       }
 }
 </script>
-
-<style>
-body{
-    background-color:#e6b8a3;
-}
-#login-button {
-  background-color: #3c4146;
-  color: #EEF4EC;
-  padding: 1em;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-left: -100px;
-  margin-top: -1em;
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 150px;
-  text-align: center;
-}
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
 </style>

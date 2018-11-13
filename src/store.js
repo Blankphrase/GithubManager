@@ -1,101 +1,112 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
 
 Vue.use(Vuex);
-Vue.use(VueAxios, axios)
-let axiosDefaults = require('axios/lib/defaults');
-axiosDefaults.baseURL = '';
-
+Vue.use(axios)
 
 export default new Vuex.Store({
 
+    
     state: {
         accessToken: '',
+        branches: [],
         username: '',
+        commits: [],
         profiles: [],
         repositories: [],
-        commits: [],
-        contents: [],
-        branches: []
-
+        repositoriesdetails: [],
+        
     },
+
+    payload: {
+        key1: 'accessToken',
+        key2: 'branches',
+        key3: 'username',
+        key4: 'commits',
+        key5: 'profiles',
+        key6: 'repositories',
+        key7: 'repositoriesdetails', 
+    },
+    
     mutations: {
 
-        UPDATE_ACCESSTOKEN: (state, accessToken) => {
-            state.accessToken = accessToken
+        setAccesstoken(state, payload) {
+            state.accessToken = payload.key1
         },
 
-        SET_USERNAME: (state, username) => {
-            state.username = username
+        setBranch(state, payload) {
+            state.branches = payload.key2
         },
 
-        SET_PROFILES(state, profiles) {
-            state.profiles = profiles
-        },
-        SET_REPOSITORIES(state, repositories) {
-            state.repositories = repositories
+        setUsername(state, payload) {
+            state.username = payload.key3
         },
 
-        SET_COMMITS(state, commits) {
-            state.commits = commits
-        },
-        SET_CONTENTS(state, contents) {
-            state.contents = contents
-        },
-        UPDATE_BRANCHES: (state, branches) => {
-            state.branches = branches
+        setCommit(state, payload) {
+            state.commits = payload.key4
         },
 
+        setProfile(state, payload) {
+            state.profiles = payload.key5
+        },
+
+        setRepository(state, payload) {
+            state.repositories = payload.key6
+        },
+        
+        setRepositoryDetails(state, payload) {
+            state.repositoriesdetails = payload.key7
+        },
+        
     },
     actions: {
+        
+        getBranches({ commit }) {
+            axios
+                .get('https://api.github.com/repos/' + localStorage.getItem('username') + '/' + localStorage.getItem('repository') + '/' + 'branches')
+                .then(r => r.data)
+                .then(branches => {
+                    commit('setBranch', branches)
+                })
+        },
+            
+        getCommits({ commit }) {
+            axios
+                .get('https://api.github.com/repos/' + localStorage.getItem('username') + '/' + localStorage.getItem('repository') + '/' + 'commits')
+                .then(r => r.data)
+                .then(commits => {
+                    commit('setCommit', commits)
+                })
+        },
 
-        loadProfiles({ commit }) {
+        getProfiles({ commit }) {
             axios
                 .get('https://api.github.com/user?' + localStorage.getItem('accessToken'))
                 .then(r => r.data)
-                .then(profiles => {
-                    commit('SET_PROFILES', profiles)
+                .then(profiles =>  {
+                    commit('setProfile', profiles)
                 })
         },
 
-        loadRepositories({ commit }) {
-            let username = this.state.profiles.login;
+        getRepositories({ commit }) {
             axios
-                .get('https://api.github.com/users/' + localStorage.getItem('userName') + '/repos')
+                .get('https://api.github.com/users/' + localStorage.getItem('username') + 'repos')
                 .then(r => r.data)
                 .then(repositories => {
-                    commit('SET_REPOSITORIES', repositories)
+                    commit('setRepository', repositories)
                 })
         },
 
-        loadContents({ commit }) {
-            axios
-                .get('https://api.github.com/repos/' + localStorage.getItem('userName') + '/' + localStorage.getItem('repo'))
-                .then(r => r.data)
-                .then(repositories => {
-                    commit('SET_CONTENTS', repositories)
-                })
-        },
 
-        loadCommits({ commit }) {
+        getRepositoryDetails({ commit }) {
             axios
-                .get('https://api.github.com/repos/' + localStorage.getItem('userName') + '/' + localStorage.getItem('repo') + '/' + 'commits')
+                .get('https://api.github.com/repos/' + localStorage.getItem('username') + '/' + localStorage.getItem('repository'))
                 .then(r => r.data)
-                .then(commits => {
-                    commit('SET_COMMITS', commits)
+                .then(repositoriesdetails => {
+                    commit('setRepositoryDetails', repositoriesdetails)
                 })
         },
-        loadBranches({ commit }) {
-            axios
-                .get('https://api.github.com/repos/' + localStorage.getItem('userName') + '/' + localStorage.getItem('repo') + '/' + 'branches')
-                .then(r => r.data)
-                .then(branches => {
-                    commit('UPDATE_BRANCHES', branches)
-                })
-        },
-
 
     },
 });

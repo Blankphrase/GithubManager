@@ -1,13 +1,13 @@
 <template>
 <div id="app">
     <a href="/profile" class="btn btn-primary" >Profile</a>
-     <router-link v-bind:to="'/respositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
+     <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
 
   
 
     <div id="respositories">
   <h2>My commits</h2>
-  <ul v-for="commit in commits">
+  <ul v-for="commit in commits" :key="commit.id">
   <li >
    <span class="name"><b>Commit Message:</b> {{commit.commit.message}}</span><br>
 
@@ -18,7 +18,7 @@
    <span class="name"><b>Url:</b> {{commit.commit.url}}</span>
 </li>
 <br>
-{{repo}}
+{{repository}}
 
   </ul>
     <router-view/>
@@ -27,23 +27,22 @@
 </template>
 
 <script>
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+
 
 export default{
  data () {
      return{
-         repo:'',
+         repository:'',
          username:''
      }
   },
   created(){
-      let repo =this.$route.params.repo;
-      this.username = localStorage.getItem('userName');
-      localStorage.setItem('repo',repo);
+      let repository =this.$route.params.repository;
+      this.username = localStorage.getItem('username');
+      localStorage.setItem('repository',repository);
   },
    mounted () {
-    this.$store.dispatch('loadCommits')
+    this.$store.dispatch('getCommits')
   },
     computed: {
     commits(){
@@ -53,29 +52,6 @@ export default{
 }
 </script>
 
-<style scoped>
-#respositories{
-    background: #D1E4FF;
-    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
-    margin-bottom: 30px;
-    padding: 10px 20px;
-}
-#respositories ul{
-    padding: 0;
-    list-style-type: none;
-}
-#respositories li{
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 20px;
-    background: rgba(255,255,255,0.7);
-}
-.commit{
-    font-weight: bold;
-    color: #860CE8;
-    display: block;
-}
-.date{
-    margin-left:5px;
-}
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
 </style>

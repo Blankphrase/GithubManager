@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
-    <a id="login-button" href="/login">Log In With GitHub</a>
+  <div class="button">
+    <p><a id="login" href="/login">Log In With GitHub</a></p>
     
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 
 
 export default {
@@ -16,19 +15,44 @@ methods:{
 };
 </script>
 
-<style>
-#login-button {
-  background-color: #3c4146;
-  color: #EEF4EC;
-  padding: 1em;
-  position: fixed;
-  top: 50%;
+<style lang="scss">
+body {
+  background: #f1c40f;
+}
+
+.button {
+  background: #3498db;
+  width: 180px;
+  padding: 4px 0;
+  
+  position: absolute;
   left: 50%;
-  margin-left: -100px;
-  margin-top: -1em;
-  text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  width: 150px;
-  text-align: center;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 3px;
+
+  p {
+    font-family: 'Roboto'; 
+    text-align: center;
+    text-transform: uppercase;
+    color: #f1c40f;
+    user-select: none;
+  }
+  
+  &:hover {
+    cursor: pointer;
+  }
+  
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    border-radius: 50%;
+    background-color: darken(#f1c40f, 20%);
+    opacity: 0.4;
+    bottom: -30px;
+  }
 }
 </style>

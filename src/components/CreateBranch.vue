@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <a href="/profile" class="btn btn-primary" >Profile</a>
-      <router-link v-bind:to="'/respositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
+      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
 
 
     <div id="nav">
@@ -11,7 +11,7 @@
   <div class="form-group">
   <span style="color:green;">{{message}}</span><br>
     <label for="exampleInputEmail1">Name</label>
-    <input v-model="branchName"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+    <input v-model="name"  type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
 
   </div>
  
@@ -24,27 +24,25 @@
 </template>
 
 <script>
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+import axios from 'axios';
 export default{
 
 data(){
   return{
     message:'',
     username: '',
-    branchName:'',
+    name:'',
     status:''
   }
 },
 created(){
-      this.username = localStorage.getItem('userName');
-      console.log(userName);
+      this.username = localStorage.getItem('username');
   },
  methods: {
  submitData() {
        axios
         .post('https://api.github.com/repos'+ localStorage.getItem('username')+'/'+ 'gits/'+'refs', {
-           ref: "ref/heads/"+ branchName,
+           ref: "ref/heads/"+ name,
            sha: localStorage.getItem('sha')
         })
        .then(function(){
@@ -55,3 +53,7 @@ created(){
     }
   }
 </script>
+
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
+</style>

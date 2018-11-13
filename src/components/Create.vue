@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <a href="/profile" class="btn btn-primary" >Profile</a>
-      <router-link v-bind:to="'/respositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
+      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
 
 
     <div id="nav">
@@ -33,8 +33,9 @@
 </template>
 
 <script>
-import axios from 'axios'
-import VueAxios from 'vue-axios'
+
+import axios from 'axios';
+
 export default{
 
 data(){
@@ -43,13 +44,12 @@ data(){
     username: '',
     name:'',
     description:'',
-    homepage: 'http:localhost:8080',
+    homepage: 'http:localhost:8082',
 
   }
 },
 created(){
-      this.username = localStorage.getItem('userName');
-      console.log(userName);
+      this.username = localStorage.getItem('username');
   },
  methods: {
  submitData() {
@@ -71,4 +71,6 @@ created(){
     }
   }
 </script>
-
+<style lang="scss">
+@import '~bootstrap/scss/bootstrap.scss';
+</style>

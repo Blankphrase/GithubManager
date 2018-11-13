@@ -1,78 +1,54 @@
 <template>
 <div id="app">
     <a href="/profile" class="btn btn-primary" >Profile</a>
-      <router-link v-bind:to="'/respositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
+      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
 
     <div id="respositories">
   <h2>My Respositories</h2>
 
   <ul >
-  <li v-for="repos in repositories" >
-   <span class="name"><b>Repo Full Name: </b><router-link v-bind:to="'/contents/'+ repos.name">{{repos.full_name}} </router-link></span><br>
-   <span class="date"><b>Repo Name: </b>{{repos.name}}</span>
-   <span class="commit"><b>Time Created: </b>{{repos.created_at}}</span>
-   <router-link v-bind:to="'/branches/'+ repos.name">View Branches</router-link> | <router-link v-bind:to="'/editrepo/'+ repos.name"> Edit </router-link>
-   <span class="commit"><router-link v-bind:to="'/commits/'+ repos.name"><a class="btn btn-primary" style="color:white;" >View Commits</a></router-link></span>
+  <li v-for="repository in repositories" :key="repository.id">
+   <span class="name"><b>Repo Full Name: </b><router-link v-bind:to="'/details/'+ repository.name">{{repository.full_name}} </router-link></span><br>
+   <span class="date"><b>Repo Name: </b>{{repository.name}}</span>
+   <span class="commit"><b>Time Created: </b>{{repository.created_at}}</span>
+   <router-link v-bind:to="'/branches/'+ repository.name">View Branches</router-link> | <router-link v-bind:to="'/edit/'+ repository.name"> Edit </router-link>
+   <span class="commit"><router-link v-bind:to="'/commits/'+ repository.name"><a class="btn btn-primary" style="color:white;" >View Commits</a></router-link></span>
    
 </li>
 <br>
-<a href="/createrepo" class="btn btn-primary" >Create new Repository</a>
+<a href="/create" class="btn btn-primary" >Create new repository</a>
   </ul>
     <router-view/>
     </div>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
 export default{
    
  mounted () {
-    this.$store.dispatch('loadRepositories')
+    this.$store.dispatch('getRepositories')
   },
    data(){
         return{
-            userName: ''
+            username: ''
         }
     },
     computed: {
         
     repositories(){
     return this.$store.state.repositories;
-    status="";
     }
 },
 created(){
-    let userName=this.$route.params.username;
-    localStorage.setItem('userName',userName);
-    console.log(userName);
-    this.username = localStorage.getItem('userName');
+    let username=this.$route.params.username;
+    localStorage.setItem('username',username);
+    this.username = localStorage.getItem('username');
 }
 }
 </script>
 
-<style scoped>
-#respositories{
-    background: #D1E4FF;
-    box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
-    margin-bottom: 30px;
-    padding: 10px 20px;
-}
-#respositories ul{
-    padding: 0;
-    list-style-type: none;
-}
-#respositories li{
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 20px;
-    background: rgba(255,255,255,0.7);
-}
-.commit{
-    font-weight: bold;
-    color: #860CE8;
-    display: block;
-}
-.date{
-    margin-left:5px;
-}
+<style lang="scss">
+
+    @import '~bootstrap/scss/bootstrap.scss';
 </style>
+
