@@ -1,28 +1,45 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+  
+ 
+
+    <router-view/>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+<script>
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+ export default{
+    name: 'app',
+    data(){
+      return{
+          
+ }
+  },
+  methods:{
+   gitAuth(){
+
+ }
+ }
+ }
 </script>
 
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app{
+
+align: center;
+margin-left: auto;
+margin-right: auto;
+top:5%;
+height: 200px;
+
+width: 1000px;
+
+
 }
 </style>

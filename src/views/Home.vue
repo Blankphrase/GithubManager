@@ -1,0 +1,34 @@
+<template>
+  <div class="home">
+    <a id="login-button" href="/login">Log In With GitHub</a>
+    
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+
+export default {
+methods:{
+  
+}
+};
+</script>
+
+<style>
+#login-button {
+  background-color: #3c4146;
+  color: #EEF4EC;
+  padding: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -1em;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 150px;
+  text-align: center;
+}
+</style>
