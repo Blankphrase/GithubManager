@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-<h1 align="center" style="margin-top:5%;">Hello, We Are Glad You Are Here!!!!!</h1>
-  <h3 align="center" margin-top="5%">Welcome to github manager App</h3>
-    <h5 align="center" margin-top="5%">Click the button below to proceed to your dashboard</h5>
-    <a id="login-button" href="/profile">Proceed To Your Dashboard</a>
+    <a id="login" href="/profile">View Profile</a>
     
   </div>
 </template>

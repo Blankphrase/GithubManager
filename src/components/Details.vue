@@ -5,7 +5,7 @@
   
 
     <div id="respositories">
-  <h2>Repository Contents</h2>
+  <h2>Repository Details</h2>
   <ul > 
   <li >
  
@@ -17,7 +17,7 @@
    
 </li>
 <br>
-{{repo}}
+{{repository}}
 
   </ul>
     <router-view/>

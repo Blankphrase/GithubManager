@@ -1,8 +1,7 @@
 <template>
 <div id="app">
-    <a href="/profile" class="btn btn-primary" >Profile</a>
-      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-primary" >Respositories</a></router-link>
-
+    <a href="/profile" class="btn btn-success" >Profile</a>
+      <router-link v-bind:to="'/repositories/'+ this.username"><a href="" class="btn btn-success" >Respositories</a></router-link>
     <div id="respositories">
   <h2>My Respositories</h2>
 

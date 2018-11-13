@@ -5,19 +5,16 @@
   
 
     <div id="respositories">
-  <h2>Repo Branches</h2>
+  <h2>Branches</h2>
   <ul v-for="branch in branches" :key="branch.id">
   <li >
-   <span class="name"><b>Branch Name:</b> {{branch.name}}</span><br>
+   <span class="name"><b>Name:</b> {{branch.name}}</span><br>
    <span class="name"><b>Commit Sha: </b> {{branch.commit.sha}}</span><br>
    <span class="name"><b>Commit Url:</b> {{branch.commit.url}}</span><br>
   
 </li>
-<br>
-
   </ul>
-  <router-link v-bind:to="'/createbranch/'"><a href="/createbranch" class="btn btn-primary" >Create new branch</a></router-link >
-    <router-view/>
+  <router-link v-bind:to="'/createbranch/'"><a href="/createbranch" class="btn btn-success" >Create branch</a></router-link >
     </div>
   </div>
 </template>
