@@ -5,7 +5,7 @@ import store from './store';
 import Qs from 'qs';
 
 Vue.use(Qs);
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 new Vue({
   router,

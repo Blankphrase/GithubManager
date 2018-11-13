@@ -10,9 +10,6 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '*', 
-      component: NotFoundComponent, 
-    },
     {
       path: '/',
       name: 'home',
@@ -77,7 +74,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      beforeEnter(to, from, next) {
+      beforeEnter() {
         window.location = 'https://github.com/login/oauth/authorize?client_id=' + '5529f03c82440fcac6f4'
     }
     },
